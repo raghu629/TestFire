@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TestFire</string>
+    <string name="auth_failed">Auth Failed</string>
+    <string name="label_password">Password</string>
+    <string name="label_email">Email</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="action_signup">SignUp</string>
+</resources>
