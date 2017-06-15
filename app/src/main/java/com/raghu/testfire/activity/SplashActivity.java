@@ -1,9 +1,9 @@
 package com.raghu.testfire.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.raghu.testfire.R;
 import com.raghu.testfire.app.Constants;
@@ -19,7 +19,15 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                finish();
             }
         }, Constants.SPLASH_TIME);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }

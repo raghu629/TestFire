@@ -15,8 +15,8 @@
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="@string/label_email" />
+            android:hint="@string/label_email"
+            android:inputType="textEmailAddress" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -29,9 +29,9 @@
         <android.support.design.widget.TextInputEditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
-            android:inputType="textPassword"
             android:layout_height="wrap_content"
-            android:hint="@string/label_password" />
+            android:hint="@string/label_password"
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -45,14 +45,21 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:onClick="onSignUpClick"
-        android:text="Create an Account here!"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/signInButton"
-        android:gravity="center"
         android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:onClick="onSignUpClick"
         android:padding="8dp"
+        android:text="Create an Account here!"
         android:textColor="@color/colorPrimary"
-        android:textSize="16sp"
-        android:layout_height="wrap_content" />
+        android:textSize="16sp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="forceCrash"
+        android:text="Crash Test" />
 
 </RelativeLayout>

@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.raghu.testfire.R;
 import com.raghu.testfire.utils.LogUtil;
 import com.raghu.testfire.utils.Utils;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
@@ -30,12 +32,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
 
-
         emailText = (TextInputEditText) findViewById(R.id.emailEditText);
         passwordText = (TextInputEditText) findViewById(R.id.passwordEditText);
 
         findViewById(R.id.signInButton).setOnClickListener(this);
-
+        Fabric.with(this, new Crashlytics());
     }
 
     private void isUserSignedIn() {
@@ -135,6 +136,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             validate = true;
         return validate;
     }
+
+    public void forceCrash(View view) {
+        throw new RuntimeException("This is a crash");
+    }
+
 
     public void onSignUpClick(View view) {
         startActivity(new Intent(this, SignUpActivity.class));
