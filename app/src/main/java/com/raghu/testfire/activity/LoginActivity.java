@@ -17,8 +17,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.raghu.testfire.R;
 import com.raghu.testfire.utils.LogUtil;
 import com.raghu.testfire.utils.Utils;
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
@@ -36,7 +34,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         passwordText = (TextInputEditText) findViewById(R.id.passwordEditText);
 
         findViewById(R.id.signInButton).setOnClickListener(this);
-        Fabric.with(this, new Crashlytics());
     }
 
     private void isUserSignedIn() {
@@ -53,7 +50,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     // User is signed out
                     LogUtil.d("onAuthStateChanged:signed_out");
                 }
-                // ...
             }
         };
     }
