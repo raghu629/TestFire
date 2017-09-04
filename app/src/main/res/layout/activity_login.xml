@@ -1,65 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:background="@color/white"
     tools:context="com.raghu.testfire.activity.LoginActivity">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/emailLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/emailEditText"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/label_email"
-            android:inputType="textEmailAddress" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_centerInParent="true">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/passwordLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/emailLayout"
-        android:layout_marginTop="8dp">
+            <ImageView
+                android:id="@+id/logoView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label_password"
-            android:inputType="textPassword" />
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/emailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logoView"
+                android:theme="@style/AppTheme">
 
-    <Button
-        android:id="@+id/signInButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordLayout"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorSecondary"
-        android:text="@string/action_sign_in" />
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_email"
+                    android:inputType="textEmailAddress" />
+            </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signInButton"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:onClick="onSignUpClick"
-        android:padding="8dp"
-        android:text="Create an Account here!"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16sp" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/passwordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailLayout"
+                android:layout_marginTop="16dp"
+                android:theme="@style/AppTheme">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:onClick="forceCrash"
-        android:text="Crash Test" />
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_password"
+                    android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/signInButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/passwordLayout"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorSecondary"
+                android:onClick="onClickLogin"
+                android:text="@string/action_sign_in"
+                android:textColor="@color/colorSecondaryText" />
+
+
+            <TextView
+                android:id="@+id/labelView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/signInButton"
+                android:gravity="center"
+                android:onClick="onSignUpClick"
+                android:padding="16dp"
+                android:text="Or also SignIn with"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <RelativeLayout
+                android:id="@+id/socialLoginLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelView"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+
+                <com.raghu.testfire.ui.CircularImageView
+                    android:id="@+id/twitterView"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:onClick="onClickLogin"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_twitter" />
+
+                <com.raghu.testfire.ui.CircularImageView
+                    android:id="@+id/googleView"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="45dp"
+                    android:layout_marginRight="45dp"
+                    android:layout_toLeftOf="@+id/twitterView"
+                    android:layout_toStartOf="@+id/twitterView"
+                    android:onClick="onClickLogin"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_google" />
+
+                <com.raghu.testfire.ui.CircularImageView
+                    android:id="@+id/faceBookView"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginStart="45dp"
+                    android:layout_toEndOf="@+id/twitterView"
+                    android:layout_toRightOf="@+id/twitterView"
+                    android:onClick="onClickLogin"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_facebook" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/socialLoginLayout"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:onClick="onSignUpClick"
+                android:padding="16dp"
+                android:text="Doesn't have an account? Create here."
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

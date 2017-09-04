@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,23 +16,45 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.raghu.testfire.R;
 import com.raghu.testfire.utils.LogUtil;
-import com.raghu.testfire.utils.Utils;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class SignUpActivity extends AppCompatActivity {
+    @BindView(R.id.emailEditText)
+    TextInputEditText emailText;
+    @BindView(R.id.passwordEditText)
+    TextInputEditText passwordText;
+
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private TextInputEditText emailText;
-    private TextInputEditText passwordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        mAuth = FirebaseAuth.getInstance();
-        emailText = (TextInputEditText) findViewById(R.id.emailEditText);
-        passwordText = (TextInputEditText) findViewById(R.id.passwordEditText);
 
-        findViewById(R.id.signUpButton).setOnClickListener(this);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mAuth = FirebaseAuth.getInstance();
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     @Override
@@ -59,26 +83,23 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
+                        if (task.isSuccessful()) {
+                            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                        } else {
                             Toast.makeText(SignUpActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
-                        } else if (task.isSuccessful()) {
-                            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                         }
-
-                        // ...
                     }
                 });
     }
-
 
     public boolean isValidate() {
         boolean validate = false;
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
-        if (Utils.isEmpty(email))
+        if (TextUtils.isEmpty(email))
             emailText.setError("Email required!");
-        else if (Utils.isEmpty(password))
+        else if (TextUtils.isEmpty(password))
             passwordText.setError("Password Required!");
         else if (passwordText.length() < 6)
             passwordText.setError("Minimum 6 digits required!");
@@ -87,14 +108,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         return validate;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.signUpButton:
-                if (isValidate()) {
-                    signUpNewUser(emailText.getText().toString(), passwordText.getText().toString());
-                }
-                break;
+    @OnClick(R.id.signUpButton)
+    public void onSignUpClick(View view) {
+        if (isValidate()) {
+            signUpNewUser(emailText.getText().toString(), passwordText.getText().toString());
         }
     }
 }

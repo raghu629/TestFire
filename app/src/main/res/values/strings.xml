@@ -5,4 +5,10 @@
     <string name="label_email">Email</string>
     <string name="action_sign_in">Sign In</string>
     <string name="action_signup">SignUp</string>
+    <string name="title_activity_home">Home</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
